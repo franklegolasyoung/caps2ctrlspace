@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(curl -s https://raw.githubusercontent.com/cuiliang/Caps2CtrlSpace/master/src/KeyMapper.cs)",
+      "Bash(curl -s https://raw.githubusercontent.com/cuiliang/Caps2CtrlSpace/master/build-single-file.ps1)",
+      "Bash(curl -s https://raw.githubusercontent.com/cuiliang/Caps2CtrlSpace/master/build.ps1)",
+      "Bash(gh api user)",
+      "Bash(where gh)"
+    ]
+  }
+}

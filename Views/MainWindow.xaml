@@ -1,0 +1,96 @@
+<ui:FluentWindow x:Class="CapsMapper.Views.MainWindow"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+                 xmlns:tray="clr-namespace:H.NotifyIcon;assembly=H.NotifyIcon.Wpf"
+                 Title="Caps2CtrlSpace"
+                 Width="420" Height="340"
+                 MinWidth="420" MinHeight="340"
+                 ResizeMode="NoResize"
+                 WindowStartupLocation="CenterScreen"
+                 ExtendsContentIntoTitleBar="True"
+                 WindowBackdropType="Mica">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Custom Title Bar -->
+        <ui:TitleBar Grid.Row="0" Title="Caps2CtrlSpace" ShowMaximize="False"
+                     Padding="8,0,0,0" />
+
+        <!-- Main Content -->
+        <StackPanel Grid.Row="1" Margin="24,8,24,24" VerticalAlignment="Center">
+
+            <!-- Status Card -->
+            <ui:CardControl Margin="0,0,0,16">
+                <ui:CardControl.Header>
+                    <StackPanel>
+                        <TextBlock Text="Keyboard Mapping" FontWeight="SemiBold" FontSize="14" />
+                        <TextBlock x:Name="StatusText" Text="CapsLock → Ctrl+Space" 
+                                   FontSize="12" Opacity="0.6" Margin="0,2,0,0" />
+                    </StackPanel>
+                </ui:CardControl.Header>
+                <ui:SymbolIcon x:Name="StatusIcon" Symbol="Checkmark24" FontSize="20" 
+                               Foreground="#4CAF50" />
+            </ui:CardControl>
+
+            <!-- Auto Start Toggle -->
+            <ui:CardControl Margin="0,0,0,16">
+                <ui:CardControl.Header>
+                    <StackPanel>
+                        <TextBlock Text="Start with Windows" FontWeight="SemiBold" FontSize="14" />
+                        <TextBlock Text="Launch automatically on login"
+                                   FontSize="12" Opacity="0.6" Margin="0,2,0,0" />
+                    </StackPanel>
+                </ui:CardControl.Header>
+                <ui:ToggleSwitch x:Name="AutoStartToggle" Checked="AutoStartToggle_Changed" 
+                                 Unchecked="AutoStartToggle_Changed" />
+            </ui:CardControl>
+
+            <!-- Info Row -->
+            <Grid Margin="0,8,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" VerticalAlignment="Center"
+                           FontSize="12" Opacity="0.5">
+                    <Run Text="v1.0.0 · Minimize to tray" />
+                </TextBlock>
+
+                <ui:HyperlinkButton Grid.Column="1" 
+                                    Content="GitHub" 
+                                    NavigateUri="https://github.com/franklegolasyoung/caps2ctrlspace"
+                                    FontSize="12" />
+            </Grid>
+        </StackPanel>
+
+        <!-- System Tray Icon -->
+        <tray:TaskbarIcon x:Name="TrayIcon"
+                          IconSource="/Assets/app.ico"
+                          ToolTipText="Caps2CtrlSpace - CapsLock → Ctrl+Space"
+                          Visibility="Visible"
+                          TrayLeftMouseDown="TrayIcon_TrayLeftMouseDown"
+                          TrayMouseDoubleClick="TrayIcon_TrayMouseDoubleClick">
+            <tray:TaskbarIcon.ContextMenu>
+                <ContextMenu>
+                    <ui:MenuItem Header="Show" Click="TrayMenu_Show_Click">
+                        <ui:MenuItem.Icon>
+                            <ui:SymbolIcon Symbol="Window24" />
+                        </ui:MenuItem.Icon>
+                    </ui:MenuItem>
+                    <Separator />
+                    <ui:MenuItem Header="Exit" Click="TrayMenu_Exit_Click">
+                        <ui:MenuItem.Icon>
+                            <ui:SymbolIcon Symbol="ArrowExit20" />
+                        </ui:MenuItem.Icon>
+                    </ui:MenuItem>
+                </ContextMenu>
+            </tray:TaskbarIcon.ContextMenu>
+        </tray:TaskbarIcon>
+    </Grid>
+</ui:FluentWindow>
